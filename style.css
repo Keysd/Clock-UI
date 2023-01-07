@@ -1,0 +1,195 @@
+:root {
+  --bg-dark: #2f363e;
+  --white-color: #fff;
+  --clock-site: 450px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
+.main {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-dark);
+  min-height: var(--clock-site);
+  border-radius: 20px;
+  border-top-left-radius: 225px;
+  border-top-right-radius: 225px;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.75),
+    10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 20px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.7);
+}
+
+.clock {
+  position: relative;
+  width: var(--clock-site);
+  height: var(--clock-site);
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+  box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset 5px 5px 20px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.clock::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--bg-dark);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 999;
+}
+
+.clock-num {
+  position: absolute;
+  inset: 20px;
+  text-align: center;
+  transform: rotate(calc(30deg * var(--i)));
+}
+
+.clock-num p {
+  font-size: 2em;
+  opacity: 0.25;
+  font-weight: bold;
+  color: var(--white-color);
+  transform: rotate(calc(-30deg * var(--i)));
+}
+
+.circle-paren {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  --circle: 8px;
+  position: absolute;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  width: calc(var(--circle) * var(--decrease-size));
+  height: calc(var(--circle) * var(--decrease-size));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle i {
+  position: absolute;
+  width: 6px;
+  height: 50%;
+  transform-origin: top;
+  background-color: var(--clr);
+  opacity: 0.75;
+  transform: scale(0.5);
+}
+
+.circle:nth-child(1) i {
+  width: 2px;
+}
+
+.circle:nth-child(2) i {
+  width: 4px;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  transform: translateY(-50%);
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--clr);
+  box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+}
+
+.time {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(135%);
+  display: flex;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.time div {
+  position: relative;
+  padding: 0 8px;
+  text-align: center;
+  color: var(--clr);
+}
+
+.time div:nth-child(1)::before,
+.time div:nth-child(2)::before {
+  content: ":";
+  position: absolute;
+  right: -4px;
+  top: -2px;
+}
+
+.time div:nth-child(4) {
+  color: var(--white-color);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.time div:nth-child(2)::before {
+  animation: animate 1s steps(1) infinite;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  :root {
+    --clock-site: 350px;
+  }
+  .circle::before {
+    width: 8px;
+    height: 8px;
+  }
+  .circle {
+    --circle: 5.8px;
+  }
+}
+
+@media (max-width: 350px) {
+  :root {
+    --clock-site: 300px;
+  }
+  .circle {
+    --circle: 4.5px;
+  }
+}
